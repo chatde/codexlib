@@ -33,6 +33,15 @@ export function Footer() {
             >
               GHB Ventures
             </a>
+            <span className="mx-1.5 text-border">&middot;</span>
+            <a
+              href="https://chatde.dev"
+              className="text-muted hover:text-gold"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              chatde.dev
+            </a>
           </p>
         </div>
       </div>
