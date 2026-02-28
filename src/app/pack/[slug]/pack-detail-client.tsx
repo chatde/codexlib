@@ -40,7 +40,7 @@ export function PackDetailClient({ pack }: { pack: Pack }) {
           .select("plan")
           .eq("user_id", data.user.id)
           .single()
-          .then(({ data: sub }) => setIsPro(sub?.plan === "pro"));
+          .then(({ data: sub }) => setIsPro(sub?.plan === "pro" || sub?.plan === "team"));
 
         supabase
           .from("user_library")
@@ -85,14 +85,18 @@ export function PackDetailClient({ pack }: { pack: Pack }) {
       const supabase = createClient();
 
       if (!isPro && !pack.is_free) {
+        // Count downloads this calendar month
+        const now = new Date();
+        const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
         const { count } = await supabase
           .from("user_downloads")
           .select("id", { count: "exact", head: true })
-          .eq("user_id", user.id);
+          .eq("user_id", user.id)
+          .gte("downloaded_at", monthStart);
 
-        if ((count ?? 0) >= 3) {
+        if ((count ?? 0) >= 5) {
           alert(
-            "Free tier limit reached (3 downloads). Upgrade to Pro for unlimited access."
+            "Free tier limit reached (5 downloads/month). Upgrade to Pro for unlimited access."
           );
           setDownloading(false);
           return;

@@ -94,7 +94,7 @@ export interface Subscription {
   user_id: string;
   stripe_customer_id: string;
   stripe_subscription_id: string | null;
-  plan: "free" | "pro";
+  plan: "free" | "pro" | "team";
   status: "active" | "canceled" | "past_due" | "incomplete";
   current_period_end: string | null;
   created_at: string;
@@ -126,6 +126,39 @@ export interface Submission {
   reviewer_notes: string | null;
   created_at: string;
   updated_at: string;
+}
+
+export interface Vault {
+  id: string;
+  user_id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  is_public: boolean;
+  note_count: number;
+  created_at: string;
+  owner?: Profile;
+}
+
+export interface VaultNote {
+  id: string;
+  vault_id: string;
+  user_id: string;
+  title: string;
+  slug: string;
+  folder_path: string;
+  content_raw: string;
+  content_compressed: string | null;
+  rosetta: string | null;
+  token_count: number | null;
+  tags: string[];
+  backlinks: string[];
+  is_public: boolean;
+  downloads: number;
+  created_at: string;
+  updated_at: string;
+  vault?: Vault;
+  owner?: Profile;
 }
 
 export interface KnowledgePack {

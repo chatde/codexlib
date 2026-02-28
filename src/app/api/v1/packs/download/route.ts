@@ -31,9 +31,9 @@ export async function GET(request: NextRequest) {
       .eq("user_id", profile.id)
       .single();
 
-    if (sub?.plan !== "pro") {
+    if (sub?.plan !== "pro" && sub?.plan !== "team") {
       return NextResponse.json(
-        { error: "Pro subscription required for bulk download" },
+        { error: "Pro or Team subscription required for bulk download" },
         { status: 403 }
       );
     }

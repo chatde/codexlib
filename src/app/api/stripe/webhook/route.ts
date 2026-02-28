@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getStripe } from "@/lib/stripe";
+import { getStripe, planFromPriceId } from "@/lib/stripe";
 import { createServiceClient } from "@/lib/supabase/server";
 import type Stripe from "stripe";
 
@@ -30,12 +30,13 @@ export async function POST(request: Request) {
     case "checkout.session.completed": {
       const session = event.data.object as Stripe.Checkout.Session;
       const userId = session.metadata?.user_id;
+      const plan = session.metadata?.plan ?? "pro";
       if (userId && session.subscription) {
         await supabase
           .from("subscriptions")
           .update({
             stripe_subscription_id: session.subscription as string,
-            plan: "pro",
+            plan,
             status: "active",
           })
           .eq("user_id", userId);
@@ -57,11 +58,16 @@ export async function POST(request: Request) {
           ? new Date(periodEnd * 1000).toISOString()
           : null;
 
+        // Detect plan from the price ID on the subscription
+        const priceId = sub.items?.data?.[0]?.price?.id;
+        const plan = priceId ? planFromPriceId(priceId) : undefined;
+
         await supabase
           .from("subscriptions")
           .update({
             status: sub.status === "active" ? "active" : sub.status === "past_due" ? "past_due" : "canceled",
             current_period_end: endDate,
+            ...(plan ? { plan } : {}),
           })
           .eq("stripe_subscription_id", sub.id);
       }

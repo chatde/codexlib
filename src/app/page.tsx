@@ -5,14 +5,20 @@ import {
   Download,
   Globe,
   BookOpen,
+  BookMarked,
   ArrowRight,
   Star,
 } from "lucide-react";
 import { getFeaturedPacks } from "@/lib/actions/packs";
+import { getFeaturedVaults } from "@/lib/actions/vaults";
 import { PackCard } from "@/components/pack-card";
+import { VaultCard } from "@/components/vault-card";
 
 export default async function HomePage() {
-  const featuredPacks = await getFeaturedPacks();
+  const [featuredPacks, featuredVaults] = await Promise.all([
+    getFeaturedPacks(),
+    getFeaturedVaults(),
+  ]);
 
   return (
     <div>
@@ -71,8 +77,8 @@ export default async function HomePage() {
               <p className="mt-1 text-sm text-muted">Token Savings</p>
             </div>
             <div>
-              <p className="text-3xl font-bold text-gold">$15</p>
-              <p className="mt-1 text-sm text-muted">/mo Unlimited</p>
+              <p className="text-3xl font-bold text-gold">$12</p>
+              <p className="mt-1 text-sm text-muted">/mo Pro</p>
             </div>
           </div>
         </div>
@@ -117,6 +123,33 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Community Vaults */}
+      {featuredVaults.length > 0 && (
+        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h2 className="text-2xl font-bold">
+                Community <span className="text-gold">Vaults</span>
+              </h2>
+              <p className="mt-1 text-sm text-muted">
+                Share your Obsidian vault. Browse others. Build knowledge together.
+              </p>
+            </div>
+            <Link
+              href="/vaults"
+              className="text-sm text-gold hover:text-gold-light flex items-center gap-1"
+            >
+              View all <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {featuredVaults.map((vault) => (
+              <VaultCard key={vault.id} vault={vault} />
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Featured Packs */}
       {featuredPacks.length > 0 && (
         <section className="bg-surface/50 border-y border-border">
@@ -149,8 +182,8 @@ export default async function HomePage() {
             Ready to supercharge your AI?
           </h2>
           <p className="text-muted mb-6 max-w-lg mx-auto">
-            Start with 3 free packs. Upgrade to Pro for unlimited access to
-            10,000+ knowledge bases.
+            Start with 5 free packs per month. Upgrade to Pro for unlimited
+            access to 10,000+ knowledge bases.
           </p>
           <Link
             href="/signup"

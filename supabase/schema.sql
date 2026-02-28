@@ -111,7 +111,7 @@ CREATE TABLE subscriptions (
   user_id UUID NOT NULL REFERENCES profiles(id) ON DELETE CASCADE UNIQUE,
   stripe_customer_id TEXT,
   stripe_subscription_id TEXT,
-  plan TEXT DEFAULT 'free' CHECK (plan IN ('free', 'pro')),
+  plan TEXT DEFAULT 'free' CHECK (plan IN ('free', 'pro', 'team')),
   status TEXT DEFAULT 'active' CHECK (status IN ('active', 'canceled', 'past_due', 'incomplete')),
   current_period_end TIMESTAMPTZ,
   created_at TIMESTAMPTZ DEFAULT NOW()
