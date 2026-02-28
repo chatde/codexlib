@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { stripe, getOrCreateCustomer, PRO_PRICE_ID } from "@/lib/stripe";
+import { getStripe, getOrCreateCustomer, PRO_PRICE_ID } from "@/lib/stripe";
+
+export const dynamic = "force-dynamic";
 
 export async function POST() {
   try {
@@ -15,7 +17,7 @@ export async function POST() {
 
     const customerId = await getOrCreateCustomer(user.id, user.email!);
 
-    const session = await stripe.checkout.sessions.create({
+    const session = await getStripe().checkout.sessions.create({
       customer: customerId,
       mode: "subscription",
       line_items: [{ price: PRO_PRICE_ID, quantity: 1 }],

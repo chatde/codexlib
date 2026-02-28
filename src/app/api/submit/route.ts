@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { z } from "zod";
 
+export const dynamic = "force-dynamic";
+
 const submitSchema = z.object({
   title: z.string().min(1).max(200),
   domain_id: z.string().uuid(),
