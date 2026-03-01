@@ -22,6 +22,12 @@ export function Footer() {
             <Link href="/api-docs" className="hover:text-gold">
               API Docs
             </Link>
+            <Link href="/privacy" className="hover:text-gold">
+              Privacy
+            </Link>
+            <Link href="/terms" className="hover:text-gold">
+              Terms
+            </Link>
           </div>
           <p className="text-xs text-muted">
             &copy; {new Date().getFullYear()} CodexLib. Built by{" "}

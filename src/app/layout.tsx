@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://codexlib.io"),
   title: "CodexLib — The Library of Alexandria for AI",
   description:
     "10,000+ AI-optimized knowledge packs in compressed format. Deep knowledge bases any AI can ingest instantly.",
@@ -23,6 +24,12 @@ export const metadata: Metadata = {
     description:
       "10,000+ AI-optimized knowledge packs in compressed format.",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CodexLib — The Library of Alexandria for AI",
+    description:
+      "10,000+ AI-optimized knowledge packs in compressed format.",
   },
 };
 
