@@ -1,0 +1,19 @@
+-- Drop all CodexLib tables (safe — CASCADE handles dependencies)
+DROP TABLE IF EXISTS pack_tags CASCADE;
+DROP TABLE IF EXISTS pack_prerequisites CASCADE;
+DROP TABLE IF EXISTS user_library CASCADE;
+DROP TABLE IF EXISTS user_downloads CASCADE;
+DROP TABLE IF EXISTS reviews CASCADE;
+DROP TABLE IF EXISTS submissions CASCADE;
+DROP TABLE IF EXISTS subscriptions CASCADE;
+DROP TABLE IF EXISTS packs CASCADE;
+DROP TABLE IF EXISTS subdomains CASCADE;
+DROP TABLE IF EXISTS domains CASCADE;
+DROP TABLE IF EXISTS tags CASCADE;
+DROP TABLE IF EXISTS profiles CASCADE;
+
+-- Drop triggers/functions
+DROP FUNCTION IF EXISTS increment_download_count() CASCADE;
+DROP FUNCTION IF EXISTS update_pack_rating() CASCADE;
+DROP FUNCTION IF EXISTS update_domain_pack_count() CASCADE;
+DROP FUNCTION IF EXISTS handle_new_user() CASCADE;
