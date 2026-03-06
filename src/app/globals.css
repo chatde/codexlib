@@ -12,6 +12,7 @@
   --color-muted: var(--muted);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-gold-muted: rgba(212, 168, 67, 0.15);
 }
 
 :root {
@@ -73,3 +74,49 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* Display font */
+.font-display {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+
+/* Update body font to DM Sans */
+body {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+}
+
+/* Hero atmospheric glow */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+/* Architectural line decoration */
+.arch-line {
+  position: relative;
+}
+.arch-line::before, .arch-line::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 168, 67, 0.4));
+}
+.arch-line::before { right: 100%; margin-right: 1rem; transform: rotate(180deg); }
+.arch-line::after { left: 100%; margin-left: 1rem; }
+
+/* Fade-in-up animation */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+.animate-fade-in-up-delay-1 { animation: fade-in-up 0.8s ease-out 0.15s forwards; opacity: 0; }
+.animate-fade-in-up-delay-2 { animation: fade-in-up 0.8s ease-out 0.3s forwards; opacity: 0; }

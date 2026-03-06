@@ -25,15 +25,24 @@ export default async function HomePage() {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-gold/5 via-transparent to-transparent" />
+        {/* Warm glow atmosphere */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full pointer-events-none animate-pulse-glow" style={{ background: 'radial-gradient(ellipse, rgba(212, 168, 67, 0.07) 0%, transparent 70%)' }} />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(212, 168, 67, 0.04) 0%, transparent 70%)' }} />
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 relative">
           <div className="text-center max-w-3xl mx-auto">
             <div className="flex justify-center mb-6">
-              <Library className="h-16 w-16 text-gold" />
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full blur-2xl opacity-50" style={{ background: 'rgba(212, 168, 67, 0.2)' }} />
+                <Library className="h-16 w-16 text-gold relative" />
+              </div>
             </div>
-            <h1 className="text-5xl sm:text-6xl font-bold tracking-tight">
+            <p className="arch-line text-xs tracking-[0.3em] uppercase font-mono mb-6 animate-fade-in-up" style={{ color: 'rgba(212, 168, 67, 0.7)' }}>
+              AI Knowledge Repository
+            </p>
+            <h1 className="font-display text-6xl sm:text-7xl font-light tracking-tight leading-[1.05] animate-fade-in-up">
               The Library of
               <br />
-              <span className="gold-shimmer">Alexandria for AI</span>
+              <span className="gold-shimmer font-bold italic">Alexandria for AI</span>
             </h1>
             <p className="mt-6 text-lg text-muted max-w-2xl mx-auto">
               10,000+ deep knowledge bases in compressed, AI-optimized format.
@@ -64,20 +73,20 @@ export default async function HomePage() {
       <section className="border-y border-border bg-surface/50">
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <p className="text-3xl font-bold text-gold">10,000+</p>
+            <div className="border-t-2 border-gold/30 pt-4">
+              <p className="text-3xl font-bold text-gold font-display">10,000+</p>
               <p className="mt-1 text-sm text-muted">Knowledge Packs</p>
             </div>
-            <div>
-              <p className="text-3xl font-bold text-gold">50+</p>
+            <div className="border-t-2 border-gold/30 pt-4">
+              <p className="text-3xl font-bold text-gold font-display">50+</p>
               <p className="mt-1 text-sm text-muted">Domains</p>
             </div>
-            <div>
-              <p className="text-3xl font-bold text-gold">~15%</p>
+            <div className="border-t-2 border-gold/30 pt-4">
+              <p className="text-3xl font-bold text-gold font-display">~15%</p>
               <p className="mt-1 text-sm text-muted">Token Savings</p>
             </div>
-            <div>
-              <p className="text-3xl font-bold text-gold">$12</p>
+            <div className="border-t-2 border-gold/30 pt-4">
+              <p className="text-3xl font-bold text-gold font-display">$12</p>
               <p className="mt-1 text-sm text-muted">/mo Pro</p>
             </div>
           </div>
@@ -86,12 +95,12 @@ export default async function HomePage() {
 
       {/* How it works */}
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center mb-12">
-          How It <span className="text-gold">Works</span>
+        <h2 className="font-display text-4xl font-light text-center mb-12">
+          How It <span className="text-gold italic">Works</span>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="text-center">
-            <div className="mx-auto w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-4">
+            <div className="mx-auto w-14 h-14 rounded-full border border-gold/30 bg-gold/8 flex items-center justify-center mb-5 shadow-lg shadow-gold/5">
               <Zap className="h-6 w-6 text-gold" />
             </div>
             <h3 className="font-semibold mb-2">Compressed Knowledge</h3>
@@ -101,7 +110,7 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="text-center">
-            <div className="mx-auto w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-4">
+            <div className="mx-auto w-14 h-14 rounded-full border border-gold/30 bg-gold/8 flex items-center justify-center mb-5 shadow-lg shadow-gold/5">
               <Globe className="h-6 w-6 text-gold" />
             </div>
             <h3 className="font-semibold mb-2">Self-Contained Packs</h3>
@@ -111,7 +120,7 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="text-center">
-            <div className="mx-auto w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-4">
+            <div className="mx-auto w-14 h-14 rounded-full border border-gold/30 bg-gold/8 flex items-center justify-center mb-5 shadow-lg shadow-gold/5">
               <Download className="h-6 w-6 text-gold" />
             </div>
             <h3 className="font-semibold mb-2">REST API</h3>
@@ -178,8 +187,8 @@ export default async function HomePage() {
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="rounded-2xl border border-gold/20 bg-gradient-to-r from-gold/5 to-transparent p-12 text-center">
           <Star className="mx-auto h-10 w-10 text-gold mb-4" />
-          <h2 className="text-3xl font-bold mb-3">
-            Ready to supercharge your AI?
+          <h2 className="font-display text-4xl font-light mb-3">
+            Ready to supercharge <em className="italic">your AI?</em>
           </h2>
           <p className="text-muted mb-6 max-w-lg mx-auto">
             Start with 5 free packs per month. Upgrade to Pro for unlimited
