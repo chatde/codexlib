@@ -30,6 +30,9 @@ export const metadata: Metadata = {
   title: "CodexLib — The Library of Alexandria for AI",
   description:
     "10,000+ AI-optimized knowledge packs in compressed format. Deep knowledge bases any AI can ingest instantly.",
+  alternates: {
+    canonical: "https://codexlib.io",
+  },
   openGraph: {
     title: "CodexLib — The Library of Alexandria for AI",
     description:
@@ -54,6 +57,21 @@ export default function RootLayout({
       <body
         className={`${cormorant.variable} ${dmSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              "name": "CodexLib",
+              "url": "https://codexlib.io",
+              "applicationCategory": "DeveloperApplication",
+              "description": "10,000+ AI-optimized knowledge packs in compressed format. Deep knowledge bases any AI can ingest instantly.",
+              "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+              "operatingSystem": "Web"
+            })
+          }}
+        />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
