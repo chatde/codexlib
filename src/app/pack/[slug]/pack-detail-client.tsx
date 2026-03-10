@@ -10,6 +10,8 @@ import {
   ChevronDown,
   ChevronUp,
   Lock,
+  Clipboard,
+  Scissors,
 } from "lucide-react";
 import { cn, formatNumber, truncateContent } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
@@ -29,6 +31,7 @@ export function PackDetailClient({ pack }: { pack: Pack }) {
   const [inLibrary, setInLibrary] = useState(false);
   const [rosettaOpen, setRosettaOpen] = useState(false);
   const [downloading, setDownloading] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const supabase = createClient();
@@ -57,6 +60,17 @@ export function PackDetailClient({ pack }: { pack: Pack }) {
   const displayContent = canViewFull
     ? pack.content_compressed
     : truncateContent(pack.content_compressed, 20);
+
+  async function handleCopy() {
+    if (!canViewFull) return;
+    try {
+      await navigator.clipboard.writeText(pack.content_compressed);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // clipboard unavailable or permission denied — silently no-op
+    }
+  }
 
   async function toggleLibrary() {
     if (!user) return;
@@ -238,6 +252,30 @@ export function PackDetailClient({ pack }: { pack: Pack }) {
             </div>
           )}
 
+          {/* Copy compressed — available to all users who can view full content */}
+          <button
+            onClick={handleCopy}
+            disabled={!canViewFull}
+            className="w-full rounded-lg border border-border py-2.5 text-sm hover:bg-surface-hover disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          >
+            {!canViewFull ? (
+              <>
+                <Lock className="h-4 w-4" />
+                Copy compressed
+              </>
+            ) : copied ? (
+              <>
+                <Clipboard className="h-4 w-4 text-gold" />
+                ✓ Copied to clipboard
+              </>
+            ) : (
+              <>
+                <Clipboard className="h-4 w-4" />
+                Copy compressed · saves {pack.savings_pct.toFixed(1)}%
+              </>
+            )}
+          </button>
+
           {user ? (
             <div className="space-y-2">
               <button
@@ -272,6 +310,16 @@ export function PackDetailClient({ pack }: { pack: Pack }) {
               Sign in to Download
             </a>
           )}
+
+          <a
+            href="https://tokenshrink.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-1.5 text-xs text-muted hover:text-foreground transition-colors"
+          >
+            <Scissors className="h-3 w-3" />
+            Compressed by TokenShrink
+          </a>
         </div>
 
         {pack.author && (
