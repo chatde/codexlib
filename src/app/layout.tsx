@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans, Geist_Mono } from "next/font/google";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import SmoothScroll from "@/components/interactive/smooth-scroll";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -72,9 +73,11 @@ export default function RootLayout({
             })
           }}
         />
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <SmoothScroll>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );
