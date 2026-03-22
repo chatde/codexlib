@@ -2,8 +2,18 @@
 
 import { useMemo } from "react";
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 function parseMarkdown(raw: string): string {
-  let html = raw
+  // Escape HTML first to prevent XSS, then apply markdown formatting
+  let html = escapeHtml(raw)
     // Code blocks (fenced)
     .replace(/```(\w*)\n([\s\S]*?)```/g, '<pre><code class="language-$1">$2</code></pre>')
     // Inline code

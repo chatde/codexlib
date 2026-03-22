@@ -10,15 +10,16 @@ import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 const navLinks = [
   { href: "/browse", label: "Browse" },
-  { href: "/vaults", label: "Vaults" },
+  { href: "/books", label: "Books" },
+  { href: "/marketplace", label: "Marketplace" },
+  { href: "/agents", label: "Agents" },
   { href: "/search", label: "Search" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/api-docs", label: "API" },
 ];
 
 const authLinks = [
   { href: "/library", label: "My Library" },
-  { href: "/my-vault", label: "My Vault" },
+  { href: "/agents/dashboard", label: "My Agents" },
   { href: "/submit", label: "Submit" },
   { href: "/settings", label: "Settings" },
 ];
