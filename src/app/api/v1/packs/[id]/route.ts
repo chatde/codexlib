@@ -56,12 +56,20 @@ export async function GET(
         .eq("id", profile.id);
     }
 
-    const { data: pack, error } = await supabase
+    // Determine if the id is a UUID or a slug
+    const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+    let query = supabase
       .from("packs")
       .select("*, domain:domains(name, slug), subdomain:subdomains(name, slug)")
-      .eq("status", "approved")
-      .or(`id.eq.${id},slug.eq.${id}`)
-      .single();
+      .eq("status", "approved");
+
+    if (isUuid) {
+      query = query.or(`id.eq.${id},slug.eq.${id}`);
+    } else {
+      query = query.eq("slug", id);
+    }
+
+    const { data: pack, error } = await query.single();
 
     if (error || !pack) {
       return NextResponse.json({ error: "Pack not found" }, { status: 404 });

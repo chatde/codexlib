@@ -49,7 +49,7 @@ export default function Image() {
             display: "flex",
           }}
         >
-          10,000+ AI-optimized knowledge packs in compressed format
+          AI-optimized knowledge packs in compressed format
         </div>
         <div
           style={{

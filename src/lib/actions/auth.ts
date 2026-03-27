@@ -31,8 +31,12 @@ export async function login(formData: FormData) {
     return { error: error.message };
   }
 
-  const redirectTo = formData.get("redirect") as string;
-  redirect(redirectTo || "/");
+  let redirectTo = (formData.get("redirect") as string) || "/";
+  // Prevent open redirect — only allow relative paths
+  if (!redirectTo.startsWith("/") || redirectTo.startsWith("//")) {
+    redirectTo = "/";
+  }
+  redirect(redirectTo);
 }
 
 export async function signup(formData: FormData) {

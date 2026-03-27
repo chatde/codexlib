@@ -19,7 +19,7 @@ const navLinks = [
 
 const authLinks = [
   { href: "/library", label: "My Library" },
-  { href: "/agents/dashboard", label: "My Agents" },
+  { href: "/agents/connect", label: "My Agents" },
   { href: "/submit", label: "Submit" },
   { href: "/settings", label: "Settings" },
 ];

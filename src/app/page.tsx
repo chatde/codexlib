@@ -56,7 +56,7 @@ export default async function HomePage() {
             </h1>
             <FadeIn delay={400}>
               <p className="mt-6 text-lg text-muted max-w-2xl mx-auto">
-                10,000+ deep knowledge bases in compressed, AI-optimized format.
+                100+ deep knowledge bases in compressed, AI-optimized format.
                 Not human English — compressed knowledge that any AI can ingest
                 instantly using TokenShrink compression.
               </p>
@@ -93,7 +93,7 @@ export default async function HomePage() {
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div className="border-t-2 border-gold/30 pt-4">
-                <p className="text-3xl font-bold text-gold font-display">10,000+</p>
+                <p className="text-3xl font-bold text-gold font-display">100+</p>
                 <p className="mt-1 text-sm text-muted">Knowledge Packs</p>
               </div>
               <div className="border-t-2 border-gold/30 pt-4">
@@ -233,7 +233,7 @@ export default async function HomePage() {
             </h2>
             <p className="text-muted mb-6 max-w-lg mx-auto">
               Start with 5 free packs per month. Upgrade to Pro for unlimited
-              access to 10,000+ knowledge bases.
+              access to all knowledge bases.
             </p>
             <MagneticButton as="div" strength={0.25}>
               <Link

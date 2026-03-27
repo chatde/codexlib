@@ -25,6 +25,10 @@ export async function GET(request: NextRequest) {
       .range(offset, offset + limit - 1);
 
     if (error) {
+      // Table may not exist yet — return empty result instead of 500
+      if (error.message.includes("schema cache") || error.code === "PGRST204") {
+        return NextResponse.json({ data: [], meta: { total: 0, page, limit, pages: 0 } });
+      }
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 

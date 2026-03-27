@@ -30,21 +30,21 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://codexlib.io"),
   title: "CodexLib — The Library of Alexandria for AI",
   description:
-    "10,000+ AI-optimized knowledge packs in compressed format. Deep knowledge bases any AI can ingest instantly.",
+    "AI-optimized knowledge packs in compressed format. Deep knowledge bases any AI can ingest instantly.",
   alternates: {
     canonical: "https://codexlib.io",
   },
   openGraph: {
     title: "CodexLib — The Library of Alexandria for AI",
     description:
-      "10,000+ AI-optimized knowledge packs in compressed format.",
+      "AI-optimized knowledge packs in compressed format.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "CodexLib — The Library of Alexandria for AI",
     description:
-      "10,000+ AI-optimized knowledge packs in compressed format.",
+      "AI-optimized knowledge packs in compressed format.",
   },
 };
 
@@ -67,7 +67,7 @@ export default function RootLayout({
               "name": "CodexLib",
               "url": "https://codexlib.io",
               "applicationCategory": "DeveloperApplication",
-              "description": "10,000+ AI-optimized knowledge packs in compressed format. Deep knowledge bases any AI can ingest instantly.",
+              "description": "AI-optimized knowledge packs in compressed format. Deep knowledge bases any AI can ingest instantly.",
               "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
               "operatingSystem": "Web"
             })

@@ -104,7 +104,7 @@ export default function TermsPage() {
           <h2 className="text-xl font-semibold text-foreground mb-3">8. Intellectual Property</h2>
           <p>
             The CodexLib name, logo, website design, and platform infrastructure are the property
-            of CodexLib and GHB Ventures. Knowledge pack content is owned by its respective
+            of CodexLib. Knowledge pack content is owned by its respective
             creators. The TokenShrink compression format is used under license.
           </p>
         </section>
