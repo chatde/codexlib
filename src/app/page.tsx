@@ -13,6 +13,7 @@ import { getFeaturedPacks } from "@/lib/actions/packs";
 import { getFeaturedVaults } from "@/lib/actions/vaults";
 import { PackCard } from "@/components/pack-card";
 import { VaultCard } from "@/components/vault-card";
+import { PackPreview } from "@/components/interactive/pack-preview";
 import FadeIn from "@/components/interactive/fade-in";
 import SplitText from "@/components/interactive/split-text";
 import MagneticButton from "@/components/interactive/magnetic-button";
@@ -110,6 +111,19 @@ export default async function HomePage() {
               </div>
             </div>
           </div>
+        </section>
+      </FadeIn>
+
+      {/* Live Pack Preview */}
+      <FadeIn delay={100}>
+        <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <h2 className="font-display text-4xl font-light text-center mb-3">
+            See It In <span className="text-gold italic">Action</span>
+          </h2>
+          <p className="text-center text-muted mb-10 max-w-lg mx-auto">
+            The Rosetta decoder expands abbreviations on-the-fly. Same depth, fewer tokens.
+          </p>
+          <PackPreview />
         </section>
       </FadeIn>
 

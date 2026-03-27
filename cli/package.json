@@ -1,0 +1,12 @@
+{
+  "name": "codexlib",
+  "version": "1.0.0",
+  "description": "CLI for CodexLib — compressed knowledge packs for AI prompts",
+  "bin": {
+    "codexlib": "./index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}
