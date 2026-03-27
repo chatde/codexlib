@@ -30,24 +30,7 @@ export function Footer() {
             </Link>
           </div>
           <p className="text-xs text-muted">
-            &copy; {new Date().getFullYear()} CodexLib. Built by{" "}
-            <a
-              href="https://ghb.ventures"
-              className="text-gold hover:text-gold-light"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GHB Ventures
-            </a>
-            <span className="mx-1.5 text-border">&middot;</span>
-            <a
-              href="https://chatde.dev"
-              className="text-muted hover:text-gold"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              chatde.dev
-            </a>
+            &copy; {new Date().getFullYear()} CodexLib.
           </p>
         </div>
       </div>
