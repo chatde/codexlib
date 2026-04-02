@@ -1,18 +1,54 @@
-# codexlib CLI
+# CodexLib MCP Server
 
-Command-line tool for [CodexLib](https://codexlib.io) — compressed knowledge packs for AI prompts.
+Model Context Protocol (MCP) server for [CodexLib](https://codexlib.io) — compressed knowledge packs for AI agents.
 
 ## Install
 
 ```bash
-# From the cli/ directory
-npm link
-
-# Or run directly
-npx codexlib <command>
+npm install -g @wattsonme/codexlib
 ```
 
-## Usage
+## Run as MCP Server
+
+```bash
+codexlib
+# Starts stdio MCP server — connects to Claude Code, Claude Desktop, etc.
+```
+
+## MCP Tools
+
+- `spore_list_packs` — list packs with domain/difficulty filters
+- `spore_search_packs` — search by title
+- `spore_get_pack` — fetch single pack by slug/UUID
+- `spore_download_pack` — bulk download (Pro/Team)
+
+## Claude Code Setup
+
+Add to `~/.claude/settings.json`:
+
+```json
+{
+  "mcpServers": {
+    "codexlib": {
+      "command": "codexlib",
+      "args": []
+    }
+  }
+}
+```
+
+## Legacy CLI (Web API)
+
+```bash
+npm install -g @wattsonme/codexlib
+codexlib pull ai-ml-llm-fundamentals
+codexlib search quantum
+```
+
+## NPM
+
+Published at: https://www.npmjs.com/package/@wattsonme/codexlib
+
 
 ```bash
 # Pull a specific pack to clipboard

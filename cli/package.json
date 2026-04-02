@@ -1,12 +1,33 @@
 {
-  "name": "codexlib",
-  "version": "1.0.0",
-  "description": "CLI for CodexLib — compressed knowledge packs for AI prompts",
+  "name": "@wattsonme/codexlib",
+  "version": "1.1.0",
+  "type": "module",
+  "description": "CodexLib MCP Server \u2014 compressed knowledge packs for AI agents via stdio",
   "bin": {
-    "codexlib": "./index.js"
+    "codexlib": "./dist-mcp.mjs"
   },
   "engines": {
     "node": ">=18"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "knowledge",
+    "ai",
+    "agents",
+    "codexlib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chatde/codexlib.git"
+  },
+  "files": [
+    "dist-mcp.mjs",
+    "README.md"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@supabase/supabase-js": "^2.0.0",
+    "zod": "^3.0.0"
+  }
 }
