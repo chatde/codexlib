@@ -1,11 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Library, Mail, Lock, User } from "lucide-react";
 import { signup, signInWithGoogle } from "@/lib/actions/auth";
 
 export default function SignupPage() {
+  return (
+    <Suspense fallback={<div className="flex min-h-[80vh] items-center justify-center text-muted">Loading...</div>}>
+      <SignupForm />
+    </Suspense>
+  );
+}
+
+function SignupForm() {
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") ?? "";
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -102,7 +113,7 @@ export default function SignupPage() {
 
         <button
           onClick={async () => {
-            const result = await signInWithGoogle();
+            const result = await signInWithGoogle(redirectTo);
             if (result?.error) setError(result.error);
           }}
           className="w-full rounded-lg border border-border bg-surface py-2.5 text-sm hover:bg-surface-hover"

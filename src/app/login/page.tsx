@@ -100,7 +100,7 @@ function LoginForm() {
 
         <button
           onClick={async () => {
-            const result = await signInWithGoogle();
+            const result = await signInWithGoogle(redirectTo);
             if (result?.error) setError(result.error);
           }}
           className="w-full rounded-lg border border-border bg-surface py-2.5 text-sm hover:bg-surface-hover"
