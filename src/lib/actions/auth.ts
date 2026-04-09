@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -12,6 +13,33 @@ const loginSchema = z.object({
 const signupSchema = loginSchema.extend({
   displayName: z.string().min(1, "Display name is required").max(100),
 });
+
+function sanitizeRedirectPath(redirectTo: string | null | undefined) {
+  if (!redirectTo || !redirectTo.startsWith("/") || redirectTo.startsWith("//")) {
+    return "/";
+  }
+
+  return redirectTo;
+}
+
+async function getAppOrigin() {
+  if (process.env.NEXT_PUBLIC_APP_URL) {
+    return process.env.NEXT_PUBLIC_APP_URL;
+  }
+
+  const headerStore = await headers();
+  const host = headerStore.get("x-forwarded-host") ?? headerStore.get("host");
+
+  if (!host) {
+    throw new Error("Unable to determine application URL for authentication.");
+  }
+
+  const protocol =
+    headerStore.get("x-forwarded-proto") ??
+    (host.includes("localhost") ? "http" : "https");
+
+  return `${protocol}://${host}`;
+}
 
 export async function login(formData: FormData) {
   const supabase = await createClient();
@@ -31,12 +59,7 @@ export async function login(formData: FormData) {
     return { error: error.message };
   }
 
-  let redirectTo = (formData.get("redirect") as string) || "/";
-  // Prevent open redirect — only allow relative paths
-  if (!redirectTo.startsWith("/") || redirectTo.startsWith("//")) {
-    redirectTo = "/";
-  }
-  redirect(redirectTo);
+  redirect(sanitizeRedirectPath(formData.get("redirect") as string | null));
 }
 
 export async function signup(formData: FormData) {
@@ -73,12 +96,15 @@ export async function signOut() {
   redirect("/");
 }
 
-export async function signInWithGoogle() {
+export async function signInWithGoogle(redirectTo?: string) {
   const supabase = await createClient();
+  const callbackUrl = new URL("/auth/callback", await getAppOrigin());
+  callbackUrl.searchParams.set("next", sanitizeRedirectPath(redirectTo));
+
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`,
+      redirectTo: callbackUrl.toString(),
     },
   });
 
